@@ -7,6 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Time;
+import java.util.Iterator;
+
 /*** Created by zaclee on 10/26/16. ***/
 @RestController
 @CrossOrigin(origins = "http://localhost:9000")
@@ -26,13 +29,27 @@ public class TimeCardController {
         return timeCard;
     }
 
-    @RequestMapping(value = "/timecard" , method = RequestMethod.OPTIONS)
-    public ResponseEntity handle(){
-        return new ResponseEntity(HttpStatus.OK);
+
+
+//    @RequestMapping(value = "/remove/{id}" , method = RequestMethod.GET)
+//    public Iterable<TimeCard> remove(@PathVariable long id) {
+//        timeCardDAO.delete(id);
+//        return timeCardDAO.findAll();
+//    }
+
+    @RequestMapping(value = "/remove/{id}" , method = RequestMethod.GET)
+    public Iterable<TimeCard> remove(@PathVariable long id) {
+        timeCardDAO.delete(id);
+        return timeCardDAO.findAll();
     }
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public String test() {
         return "Hello World";
+    }
+
+    @RequestMapping(value = "/timecard" , method = RequestMethod.OPTIONS)
+    public ResponseEntity handle(){
+        return new ResponseEntity(HttpStatus.OK);
     }
 }
