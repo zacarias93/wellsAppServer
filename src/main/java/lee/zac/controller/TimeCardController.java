@@ -12,7 +12,7 @@ import java.util.Iterator;
 
 /*** Created by zaclee on 10/26/16. ***/
 @RestController
-@CrossOrigin(origins = "http://localhost:9000")
+@CrossOrigin
 public class TimeCardController {
 
     @Autowired
@@ -23,29 +23,16 @@ public class TimeCardController {
         return timeCardDAO.findAll();
     }
 
-    @RequestMapping(value = "/timecard" , method = RequestMethod.POST) //Post marshalls data into an object
+    @RequestMapping(value = "/timecard" , method = RequestMethod.POST)
     public TimeCard submitTimeCard(@RequestBody TimeCard timeCard){
         timeCardDAO.save(timeCard);
         return timeCard;
     }
 
-
-
-//    @RequestMapping(value = "/remove/{id}" , method = RequestMethod.GET)
-//    public Iterable<TimeCard> remove(@PathVariable long id) {
-//        timeCardDAO.delete(id);
-//        return timeCardDAO.findAll();
-//    }
-
     @RequestMapping(value = "/remove/{id}" , method = RequestMethod.GET)
     public Iterable<TimeCard> remove(@PathVariable long id) {
         timeCardDAO.delete(id);
         return timeCardDAO.findAll();
-    }
-
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
-    public String test() {
-        return "Hello World";
     }
 
     @RequestMapping(value = "/timecard" , method = RequestMethod.OPTIONS)
