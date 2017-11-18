@@ -1,6 +1,8 @@
 package lee.zac;
 
-import lee.zac.model.TimeCard;
+import lee.zac.model.Employee;
+import lee.zac.model.Job;
+import lee.zac.model.TimeSheet;
 import lee.zac.repository.TimeCardDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -11,23 +13,28 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class HrAppApplication implements CommandLineRunner {
 
 
+    @Autowired
+    TimeCardDAO timeCardDAO;
 
-	@Autowired
-	TimeCardDAO timeCardDAO;
+    public static void main(String[] args) {
+        SpringApplication.run(HrAppApplication.class, args);
+    }
 
-	public static void main(String[] args) {
-		SpringApplication.run(HrAppApplication.class, args);
-	}
+    @Override
+    public void run(String... args) throws Exception {
 
-	@Override
-	public void run(String... args) throws Exception {
-		TimeCard timeCard1 = new TimeCard(1, "9:00am", "9:00pm");
-		TimeCard timeCard2 = new TimeCard(2, "10:00am", "8:00pm");
-		TimeCard timeCard3 = new TimeCard(3, "11:00am", "6:00pm");
-		TimeCard timeCard4 = new TimeCard(1, "11:00am", "6:00pm");
-		timeCardDAO.save(timeCard1);
-		timeCardDAO.save(timeCard2);
-		timeCardDAO.save(timeCard3);
-		timeCardDAO.save(timeCard4);
-	}
+
+        Employee employee1 = new Employee(1, "The", "Reaper", "z", 22.00);
+        Employee employee2 = new Employee(1, "Mr.", "Jones", "z", 99.00);
+
+        Job job1 = new Job(1, "Job1");
+        Job job2 = new Job(2, "Job2");
+
+        TimeSheet timecard1 = new TimeSheet( employee1, job1, "8");
+        TimeSheet timecard2 = new TimeSheet( employee2, job2, "10");
+
+        timeCardDAO.save(timecard1);
+        timeCardDAO.save(timecard2);
+
+    }
 }

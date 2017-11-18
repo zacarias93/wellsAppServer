@@ -12,27 +12,44 @@ public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
-    private String name;
+    private long ID;
+    private String firstName;
+    private String lastName;
     private String password;
     private double payrate;
 
+    public Employee(long ID, String firstName, String lastName, String password, double payrate) {
+        this.ID = ID;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.payrate = payrate;
+    }
+
     public Employee() {}
 
-    public String getName() {
-        return name;
+    public long getID() {
+        return ID;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setID(long ID) {
+        this.ID = ID;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public long getId() {
-        return id;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getPassword() {
